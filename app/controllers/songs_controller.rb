@@ -1,49 +1,49 @@
 class SongsController < ApplicationController
   before_action :set_song!, only: [:show, :edit, :update]
 
-  def index 
-    @songs = Song.all 
-  end 
+  def index
+    @songs = Song.all
+  end
 
-  def show 
-  end 
+  def show
+  end
 
-  def new 
-    @song = Song.new 
-  end 
+  def new
+    @song = Song.new
+  end
 
-  def create 
+  def create
     @song = Song.new(song_params)
 
     if @song.valid?
-      @song.save 
+      @song.save
       redirect_to song_path(@song)
-    else render :new 
-    end 
-  end 
+    else render :new
+    end
+  end
 
   def edit
-  end 
+  end
 
-  def update 
+  def update
     @song.update(song_params)
-    if @song.valid? 
+    if @song.valid?
       redirect_to song_path(@song)
-    else render :edit 
-    end 
-  end 
+    else render :edit
+    end
+  end
 
-  def destroy 
-    Song.find(params[:id]).destroy 
+  def destroy
+    Song.find(params[:id]).destroy
     redirect_to song_path(@songs)
-  end 
+  end
 
-  private 
+  private
   def song_params
     params.require(:song).permit(:title, :released, :release_year, :artist_name, :genre)
-  end 
+  end
 
-  def set_song! 
+  def set_song!
     @song = Song.find(params[:id])
-  end 
+  end
 end
